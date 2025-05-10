@@ -5,26 +5,27 @@ import UIKit
 
 public class SwiftFormGuard {
     private var fields: [SFGFieldValidator] = []
-
-    @MainActor func register(field: SFGInputField, type: SFGFieldType) {
-        let validator = SFGFieldValidator(type: type, field: field)
+    
+    @MainActor
+    func register(field: SFGInputField, key: String, rules: [ValidationRule]) {
+        let validator = SFGFieldValidator(field: field, key: key, rules: rules)
         validator.addValidationRule()
         fields.append(validator)
     }
-
-    @MainActor func validateAll() -> (isValid: Bool, values: [String: String]) {
+    
+    @MainActor
+    func validateAll() -> (isValid: Bool, values: [String: Any]) {
         var isAllValid = true
-        var results: [String: String] = [:]
-
+        var results: [String: Any] = [:]
+        
         for validator in fields {
             let isValid = validator.validate()
-            if !isValid {
-                isAllValid = false
-            } else if let value = validator.value() {
+            isAllValid = isAllValid && isValid
+            
+            if isValid, let value = validator.value() {
                 results[validator.key] = value
             }
         }
-
         return (isAllValid, results)
     }
 }

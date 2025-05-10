@@ -7,7 +7,6 @@
 
 import UIKit
 
-struct ValidationError {
+public struct ValidationError {
     let message: String
 }
-

@@ -28,7 +28,7 @@ class SFGInputField: UIStackView {
     
     private func setupErrorLabel() {
         errorLabel.textColor = .systemRed
-        errorLabel.font = UIFont(name: "Manrope-Regular", size: 12)!
+        errorLabel.font = .systemFont(ofSize: 12)
         errorLabel.numberOfLines = 0
         errorLabel.isHidden = true
         addArrangedSubview(errorLabel)
@@ -79,5 +79,3 @@ extension SFGInputField: UITextFieldDelegate {
         validate()
     }
 }
-
-

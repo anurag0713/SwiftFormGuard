@@ -7,42 +7,35 @@
 
 final class SFGFieldValidator {
     let field: SFGInputField
-    let type: SFGFieldType
+    let key: String
+    let rules: [ValidationRule]
 
-    init(type: SFGFieldType, field: SFGInputField) {
-        self.type = type
+    init(field: SFGInputField, key: String, rules: [ValidationRule]) {
         self.field = field
+        self.key = key
+        self.rules = rules
     }
     
-    @MainActor func addValidationRule() {
+    @MainActor
+    func addValidationRule() {
         self.field.validator = { [weak self] text in
             guard let self = self else { return nil }
-            for rule in type.rules {
-                if let error = rule(text) {
+            for rule in self.rules {
+                if let error = rule.validate(text) {
                     return error.message
                 }
             }
             return nil
         }
     }
-
-    @MainActor func validate() -> Bool {
-        let text = field.getText()
-        for rule in type.rules {
-            if let error = rule(text) {
-                field.showError(error.message)
-                return false
-            }
-        }
-        field.hideError()
-        return true
+    
+    @MainActor
+    func validate() -> Bool {
+        return field.validate()
     }
 
-    @MainActor func value() -> String? {
+    @MainActor
+    func value() -> String? {
         return field.getText()?.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-
-    var key: String {
-        return type.key
     }
 }
