@@ -1,24 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OZq-Rd-7G5">
+                                <rect key="frame" x="20" y="340.66666666666669" width="353" height="196.00000000000006"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BXR-Tp-W9x" customClass="SFGInputField" customModule="Example" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="34"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Required field" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NEx-EA-frb">
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <connections>
+                                            <outlet property="textField" destination="NEx-EA-frb" id="pzH-i2-5l4"/>
+                                        </connections>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jNU-h2-KDe" customClass="SFGInputField" customModule="Example" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="54" width="353" height="34"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Custom rule" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WJV-Xo-aRl">
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <connections>
+                                            <outlet property="textField" destination="WJV-Xo-aRl" id="mEE-YL-WND"/>
+                                        </connections>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Ad-MW-eVX" customClass="SFGInputField" customModule="Example" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="108" width="353" height="34"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email field" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cxo-Dr-5iG">
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <connections>
+                                            <outlet property="textField" destination="cxo-Dr-5iG" id="ZDg-xP-ZiQ"/>
+                                        </connections>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ng0-Pt-nur" customClass="SFGInputField" customModule="Example" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="162" width="353" height="34"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Length limit field" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZGb-Dx-9ER">
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <connections>
+                                            <outlet property="textField" destination="ZGb-Dx-9ER" id="0Hc-6Z-P4C"/>
+                                        </connections>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7W-v8-uQe">
+                                <rect key="frame" x="20" y="566.66666666666663" width="353" height="34.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Submit"/>
+                                <connections>
+                                    <action selector="didTapSubmit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZUH-53-t9P"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="result here!!!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWY-GN-1gE">
+                                <rect key="frame" x="20" y="611" width="353" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OZq-Rd-7G5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="2FL-Vn-q2a"/>
+                            <constraint firstItem="X7W-v8-uQe" firstAttribute="top" secondItem="OZq-Rd-7G5" secondAttribute="bottom" constant="30" id="DBx-U5-W2j"/>
+                            <constraint firstItem="JWY-GN-1gE" firstAttribute="leading" secondItem="X7W-v8-uQe" secondAttribute="leading" id="OIs-6U-7cI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JWY-GN-1gE" secondAttribute="bottom" constant="10" id="Xbk-Oh-SUg"/>
+                            <constraint firstItem="X7W-v8-uQe" firstAttribute="leading" secondItem="OZq-Rd-7G5" secondAttribute="leading" id="YYn-Pq-E8a"/>
+                            <constraint firstItem="X7W-v8-uQe" firstAttribute="trailing" secondItem="OZq-Rd-7G5" secondAttribute="trailing" id="bdZ-gG-vmq"/>
+                            <constraint firstItem="JWY-GN-1gE" firstAttribute="trailing" secondItem="X7W-v8-uQe" secondAttribute="trailing" id="hRv-rK-El0"/>
+                            <constraint firstItem="OZq-Rd-7G5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="mon-nl-GmB"/>
+                            <constraint firstItem="OZq-Rd-7G5" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="mqM-co-zEK"/>
+                            <constraint firstItem="X7W-v8-uQe" firstAttribute="bottom" secondItem="JWY-GN-1gE" secondAttribute="top" constant="-10" id="whR-Mr-CX2"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="customRuleField" destination="jNU-h2-KDe" id="5LN-aU-oVa"/>
+                        <outlet property="emailField" destination="7Ad-MW-eVX" id="obq-0w-MYZ"/>
+                        <outlet property="lengthLimitField" destination="Ng0-Pt-nur" id="x5l-QV-bx4"/>
+                        <outlet property="requiredField" destination="BXR-Tp-W9x" id="BXd-kW-mTg"/>
+                        <outlet property="resultLabel" destination="JWY-GN-1gE" id="vZw-LV-wHb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="260" y="48"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
