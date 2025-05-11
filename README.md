@@ -4,8 +4,7 @@
 
 - ✅ Clean, user-friendly inline error messages  
 - ⚡️ Real-time validation using `UITextFieldDelegate`  
-- *🧩 Supports built-in and Custom rules. (coming-soon)*
-- *🌐 Custom error messages. (coming-soon)*
+- 🧩 Supports built-in and Custom rules.
 
 ---
 
@@ -24,16 +23,16 @@
 ## ✨ Features
 
 - Modular validation rules (required, email, numeric, password, etc.)
-- Developer-defined field types for reusable validation
-- Full control over validation logic and error strings (coming-soon)
+- Developer-defined field keys for the field which get returned in form of dict on successfull validation
+- Full control over validation logic and error strings
 - Clear API for showing/hiding inline errors
-- Override built-in rules without modifying the core lib (coming-soon)
+- Custom rules
 
 ---
 
 ## 🛠 Installation
 
-SwitfFormGuard was originally built for personal use, so customization of validation rules or error messages currently requires modifying the core source files. This is a known limitation and improvements are in progress to support external rule injection and message overrides.
+SPM and Cocoapods coming soon.
 
 In the meantime, feel free to copy the `SwiftFormGuard` folder directly into your project and make any modifications needed to suit your use case.
 
@@ -56,16 +55,32 @@ private let validator = SwiftFormGuard()
 ```
 ### 4. Register Your Input Fields
 
-Register each input field with the validator, specifying the expected field type:
+Register each input field with the validator, specifying the field key and array of rules:
 
 ```swift
-validator.register(field: emailField, type: .email)
-validator.register(field: passwordField, type: .password)
-validator.register(field: nameField, type: .name)
-validator.register(field: wordLimitField, type: .language)
+formValidator.register(field: requiredField, key: "required", rules: [SFGRule.RequiredField()])
+formValidator.register(field: emailField, key: "email", rules: [SFGRule.RequiredField(), SFGRule.IsValidEmail()])
+formValidator.register(field: lengthLimitField, key: "lengthLimit", rules: [SFGRule.MaxLength(limit: 20)])
 ```
 
-### 5. Validate on submit
+### 5. Custom rules
+
+Add your own custom rules for validation logic to suit your field:
+
+```swift
+struct CustomRule: SFGValidationRule {
+    func validate(_ value: String?) -> ValidationError? {
+        if value?.contains("x") == true {
+            return ValidationError(message: "Value must not contain 'x'")
+        }
+        return nil
+    }
+}
+
+formValidator.register(field: customRuleField, key: "CustomRule", rules: [CustomRule()])
+```
+
+### 6. Validate on submit
 
 Trigger validation when the user taps the submit button:
 
@@ -80,11 +95,11 @@ Trigger validation when the user taps the submit button:
     }
 }
 ```
+If all fields are valid you will get the values of all field in a dict with the keys passed while registering the fields.
 
 ## What next?
 
-- Code updation and restructering for SwiftPackage and Cocoapods integration
-- Custom Rules, Errors and FieldTypes
+- SwiftPackage and Cocoapods integration
 - TextView integration
 
 ## 📄 License
