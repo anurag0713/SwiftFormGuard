@@ -32,9 +32,27 @@
 
 ## 🛠 Installation
 
-SPM and Cocoapods coming soon.
+### Swift Package Manager
+Open SPM dependency manager through File > Swift Packages > Add Package Dependency....
 
-In the meantime, feel free to copy the `SwiftFormGuard` folder directly into your project and make any modifications needed to suit your use case.
+and insert repository URL:
+
+https://github.com/anurag0713/SwiftFormGuard.git
+
+To add dependency in your own package, just specify a package in dependencies of your Package.swift:
+```swift
+.package(
+name: "SwiftFormGuard",
+url: "https://github.com/anurag0713/SwiftFormGuard.git",
+.upToNextMajor(from: "1.0.0")
+)
+```
+### Cocoapods
+First, be sure to run pod repo update to get the latest version available.
+Add pod 'SwiftFormGuard' to your Podfile and run pod install
+
+### Manually
+If you dont want to use either of those and want more control then feel free to copy the `SwiftFormGuard` folder directly into your project and make any modifications needed to suit your use case.
 
 ## 🧪 Usage
 
