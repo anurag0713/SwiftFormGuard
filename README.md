@@ -3,7 +3,7 @@
 **SwiftFormGuard** is a lightweight Swift library for creating **inline warning fields** with **live input validation** using `UITextField`. Just register your field with a type, and it automatically checks input against validation rules and displays contextual inline errors in real time.
 
 - ✅ Clean, user-friendly inline error messages  
-- ⚡️ Real-time validation using `UITextFieldDelegate`  
+- ⚡️ Real-time validation for `UITextField` and `UITextView`
 - 🧩 Supports built-in and Custom rules.
 
 ---
@@ -45,7 +45,8 @@ In the meantime, feel free to copy the `SwiftFormGuard` folder directly into you
 
 ### 2. Connect the TextField Outlet  
 - In Interface Builder, select the `SFGInputField`.
-- Connect its `textField` outlet to the `UITextField` inside the stack view.
+- Connect its `textField` or `textView` outlet to the respective UI component inside the stack view.
+Note - Only one component can be added for each field. Otherwise you will get fatal error.
 
 ### 3. Create the Validator Instance  
 In your view controller, declare an instance of `SwiftFormGuard`:
@@ -80,7 +81,25 @@ struct CustomRule: SFGValidationRule {
 formValidator.register(field: customRuleField, key: "CustomRule", rules: [CustomRule()])
 ```
 
-### 6. Validate on submit
+### 6. Input field configuration
+
+Update the Error label and live validation however you want. More configs will be added in future if needed.
+
+```swift
+// Manually changing single components
+SFGInputFieldConfig.shared.errorLabelStyle.font      = .systemFont(ofSize: 10, weight: .medium)
+SFGInputFieldConfig.shared.errorLabelStyle.textColor = .red
+
+// Change anything for the errorLabel
+SFGInputFieldConfig.shared.errorLabelStyle.setupBlock = { label in
+    label.textAlignment = .left
+}
+
+// Toggle live validation
+SFGInputFieldConfig.shared.isLiveValidationEnabled = true
+```
+
+### 7. Validate on submit
 
 Trigger validation when the user taps the submit button:
 
@@ -97,10 +116,11 @@ Trigger validation when the user taps the submit button:
 ```
 If all fields are valid you will get the values of all field in a dict with the keys passed while registering the fields.
 
-## What next?
+## Known Issues & Contributions
+If you come across any bugs or issues, feel free to report them. I’ll do my best to fix them as time permits. Contributions are always welcome! I’d love to improve this project with help from the community, as I’m sure there’s plenty of room for improvement since this is my first time.
 
-- SwiftPackage and Cocoapods integration
-- TextView integration
+### Issues
+- Since this project uses UITextViewDelegate for validation, setting your own delegate will override the one used by SFG. This will break the live validation feature.
 
 ## 📄 License
 MIT License. See LICENSE for details.
