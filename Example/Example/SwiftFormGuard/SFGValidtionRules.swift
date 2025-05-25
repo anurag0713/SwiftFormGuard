@@ -4,24 +4,23 @@
 //
 //  Created by Anurag Singh on 04/05/25.
 //
-
 import UIKit
 
-public protocol SFGValidationRule {
+public protocol ValidationRule {
     func validate(_ value: String?) -> ValidationError?
 }
 
 public enum SFGRule {
-
+    
     // MARK: - Built-in rules
-    public struct NoValidationRequired: SFGValidationRule {
+    public struct NoValidationRequired: ValidationRule {
         public init() {}
         public func validate(_ value: String?) -> ValidationError? {
             return nil
         }
     }
     
-    public struct RequiredField: SFGValidationRule {
+    public struct RequiredField: ValidationRule {
         public init() {}
         public func validate(_ value: String?) -> ValidationError? {
             guard let value = value?.trimmingCharacters(in: .whitespacesAndNewlines), !value.isEmpty else {
@@ -31,7 +30,7 @@ public enum SFGRule {
         }
     }
     
-    public struct MaxLength: SFGValidationRule {
+    public struct MaxLength: ValidationRule {
         let limit: Int
         public init(limit: Int) {
             self.limit = limit
@@ -44,7 +43,7 @@ public enum SFGRule {
         }
     }
     
-    public struct IsNumeric: SFGValidationRule {
+    public struct IsNumeric: ValidationRule {
         public init() {}
         public func validate(_ value: String?) -> ValidationError? {
             guard let value = value, CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: value)) else {
@@ -54,7 +53,7 @@ public enum SFGRule {
         }
     }
     
-    public struct IsValidEmail: SFGValidationRule {
+    public struct IsValidEmail: ValidationRule {
         public init() {}
         public func validate(_ value: String?) -> ValidationError? {
             guard let value = value, value.isValidEmail() else {
@@ -64,7 +63,7 @@ public enum SFGRule {
         }
     }
     
-    public struct IsValidPassword: SFGValidationRule {
+    public struct IsValidPassword: ValidationRule {
         private let regex: String
         
         public init(regex: String = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,}$") {

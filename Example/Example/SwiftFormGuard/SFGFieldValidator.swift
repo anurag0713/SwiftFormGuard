@@ -8,9 +8,9 @@
 final class SFGFieldValidator {
     let field: SFGInputField
     let key: String
-    let rules: [SFGValidationRule]
+    let rules: [ValidationRule]
 
-    init(field: SFGInputField, key: String, rules: [SFGValidationRule]) {
+    init(field: SFGInputField, key: String, rules: [ValidationRule]) {
         self.field = field
         self.key = key
         self.rules = rules
@@ -34,7 +34,8 @@ final class SFGFieldValidator {
         return field.validate()
     }
 
-    @MainActor func value() -> String? {
+    @MainActor
+    func value() -> String? {
         return field.getText()?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }

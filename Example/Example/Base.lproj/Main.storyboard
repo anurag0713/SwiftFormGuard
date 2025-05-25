@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OZq-Rd-7G5">
-                                <rect key="frame" x="20" y="340.66666666666669" width="353" height="196.00000000000006"/>
+                                <rect key="frame" x="20" y="253.99999999999997" width="353" height="369.33333333333326"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BXR-Tp-W9x" customClass="SFGInputField" customModule="Example" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="34"/>
@@ -71,10 +71,34 @@
                                             <outlet property="textField" destination="ZGb-Dx-9ER" id="0Hc-6Z-P4C"/>
                                         </connections>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3hu-fc-Sjb" customClass="SFGInputField" customModule="Example" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="216" width="353" height="153.33333333333337"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TextView" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7J-vF-SGi">
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfJ-Dx-YEr">
+                                                <rect key="frame" x="0.0" y="25.333333333333314" width="353" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="128" id="KyF-fa-MUZ"/>
+                                                </constraints>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <connections>
+                                            <outlet property="textView" destination="gfJ-Dx-YEr" id="X2U-DK-Oko"/>
+                                        </connections>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7W-v8-uQe">
-                                <rect key="frame" x="20" y="566.66666666666663" width="353" height="34.333333333333371"/>
+                                <rect key="frame" x="20" y="653.33333333333337" width="353" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Submit"/>
                                 <connections>
@@ -82,7 +106,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="result here!!!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWY-GN-1gE">
-                                <rect key="frame" x="20" y="611" width="353" height="20.333333333333371"/>
+                                <rect key="frame" x="20" y="697.66666666666663" width="353" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -103,8 +127,10 @@
                             <constraint firstItem="X7W-v8-uQe" firstAttribute="bottom" secondItem="JWY-GN-1gE" secondAttribute="top" constant="-10" id="whR-Mr-CX2"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Home" id="j51-Wa-O6O"/>
                     <connections>
                         <outlet property="customRuleField" destination="jNU-h2-KDe" id="5LN-aU-oVa"/>
+                        <outlet property="descriptionField" destination="3hu-fc-Sjb" id="l5o-Bm-bPO"/>
                         <outlet property="emailField" destination="7Ad-MW-eVX" id="obq-0w-MYZ"/>
                         <outlet property="lengthLimitField" destination="Ng0-Pt-nur" id="x5l-QV-bx4"/>
                         <outlet property="requiredField" destination="BXR-Tp-W9x" id="BXd-kW-mTg"/>
@@ -113,10 +139,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260" y="48"/>
+            <point key="canvasLocation" x="360" y="-496"/>
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

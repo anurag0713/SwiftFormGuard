@@ -12,4 +12,5 @@ public class SFGInputFieldConfig {
     private init() {}
     
     public var errorLabelStyle = SFGInputFieldErrorLabelStyle()
+    public var isLiveValidationEnabled = true
 }

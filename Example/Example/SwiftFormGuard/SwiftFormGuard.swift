@@ -7,7 +7,7 @@ public class SwiftFormGuard {
     private var fields: [SFGFieldValidator] = []
     
     @MainActor
-    func register(field: SFGInputField, key: String, rules: [SFGValidationRule]) {
+    func register(field: SFGInputField, key: String, rules: [ValidationRule]) {
         let validator = SFGFieldValidator(field: field, key: key, rules: rules)
         validator.addValidationRule()
         fields.append(validator)
