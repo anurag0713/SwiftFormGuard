@@ -6,52 +6,108 @@
 //
 import UIKit
 
+protocol SFGInputComponent {
+    @MainActor var inputText: String? { get set }
+}
+
+extension UITextField: SFGInputComponent {
+    public var inputText: String? {
+        get { return text }
+        set { text = newValue }
+    }
+}
+
+extension UITextView: SFGInputComponent {
+    public var inputText: String? {
+        get { return text }
+        set { text = newValue }
+    }
+}
+
 @IBDesignable
 class SFGInputField: UIStackView {
 
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textField: UITextField! {
+        didSet {
+            guard inputComponent == nil else {
+                preconditionFailure("""
+                    SFGInputField can only be connected to either a UITextField or UITextView, not both.
+                    Make sure only one of the @IBOutlets is connected in Interface Builder.
+                """)
+            }
+            textField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
+            inputComponent = textField
+        }
+    }
+    @IBOutlet weak var textView: UITextView! {
+        didSet {
+            guard inputComponent == nil else {
+                preconditionFailure("""
+                    SFGInputField can only be connected to either a UITextField or UITextView, not both.
+                    Make sure only one of the @IBOutlets is connected in Interface Builder.
+                """)
+            }
+            textView.delegate = self
+            inputComponent = textView
+        }
+    }
+    
+    private var inputComponent: (SFGInputComponent & UIView)?
     private var errorLabel = UILabel()
+    private var config = SFGInputFieldConfig.shared
     
     public var validator: ((String?) -> String?)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.axis = .vertical
             self.spacing = 2
-            self.textField.delegate = self
             
             self.setupErrorLabel()
         }
     }
     
     private func setupErrorLabel() {
-        errorLabel.textColor = .systemRed
-        errorLabel.font = .systemFont(ofSize: 12)
-        errorLabel.numberOfLines = 0
+        errorLabel.removeFromSuperview()
+        errorLabel = UILabel()
+        
+        let config = config.errorLabelStyle
+
+        errorLabel.textColor = config.textColor ?? .systemRed
+        errorLabel.font = config.font ?? .systemFont(ofSize: 12)
+        errorLabel.numberOfLines = config.numberOfLines ?? 0
         errorLabel.isHidden = true
+        
+        config.setupBlock?(errorLabel)
+        
         addArrangedSubview(errorLabel)
     }
+
 
     // MARK: - Validation
     @discardableResult
     func validate() -> Bool {
         hideError()
-        if let message = validator?(textField.text), !message.isEmpty {
+        
+        if let text = inputComponent?.inputText,
+           let message = validator?(text)  {
             showError(message)
             return false
         }
+
         return true
     }
 
     // MARK: - Public API
     func setText(_ value: String?) {
-        textField.text = value
+        inputComponent?.inputText = value
     }
 
     func getText() -> String? {
-        return textField.text
+        return inputComponent?.inputText
     }
 
     func setKeyboardType(_ type: UIKeyboardType) {
@@ -74,8 +130,17 @@ class SFGInputField: UIStackView {
     }
 }
 
-extension SFGInputField: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        validate()
+extension SFGInputField: UITextViewDelegate {
+    
+    @objc func textFieldEditingChanged(_ textField: UITextField) {
+        if config.isLiveValidationEnabled {
+            validate()
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if config.isLiveValidationEnabled {
+            validate()
+        }
     }
 }
