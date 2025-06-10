@@ -25,7 +25,7 @@ extension UITextView: SFGInputComponent {
 }
 
 @IBDesignable
-class SFGInputField: UIStackView {
+public class SFGInputField: UIStackView {
 
     @IBOutlet weak var textField: UITextField! {
         didSet {
@@ -58,7 +58,7 @@ class SFGInputField: UIStackView {
     
     public var validator: ((String?) -> String?)?
 
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         
         DispatchQueue.main.async { [weak self] in
@@ -138,7 +138,7 @@ extension SFGInputField: UITextViewDelegate {
         }
     }
     
-    func textViewDidChange(_ textView: UITextView) {
+    public func textViewDidChange(_ textView: UITextView) {
         if config.isLiveValidationEnabled {
             validate()
         }
